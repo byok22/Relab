@@ -1,0 +1,14 @@
+query{
+  customerQuery{
+    customers{
+      id
+      customerID
+      customerName
+      division
+      buildingID
+      building
+      available
+    }
+    
+  }
+}

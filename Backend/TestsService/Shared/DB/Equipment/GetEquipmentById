@@ -1,0 +1,21 @@
+CREATE PROCEDURE [dbo].[GetEquipmentById]
+    @Id INT
+AS
+BEGIN
+    BEGIN TRY
+        IF EXISTS (SELECT 1 FROM [dbo].[CT_Equipments] WHERE [Id] = @Id)
+        BEGIN
+            SELECT * 
+            FROM [dbo].[CT_Equipments]
+            WHERE [Id] = @Id;
+        END
+        ELSE
+        BEGIN
+            SELECT NULL AS id, 'Equipment not found' AS message;
+        END
+    END TRY
+    BEGIN CATCH
+        SELECT NULL AS id, ERROR_MESSAGE() AS message;
+    END CATCH
+END;
+GO

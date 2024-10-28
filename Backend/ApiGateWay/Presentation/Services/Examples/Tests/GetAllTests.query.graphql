@@ -1,0 +1,137 @@
+query{
+  testQuery{
+    getAllTest{
+      id
+      name
+      description
+      start
+      end
+      samples{
+        quantity
+        weight
+        size
+      }
+      
+      specialInstructions
+      profile {
+        file
+      }
+      attachments {
+        file
+      }
+      enginner{
+        employeeNumber       
+        employeeType
+        name
+      }
+      technicians {
+        employeeType
+      }
+      specifications {
+        specificationName
+      }
+      equipments {
+        id
+      }
+      status
+      changeStatusTest {
+        status
+      }
+      
+    }
+  }
+}
+
+
+
+
+
+///Response 
+
+{
+  "data": {
+    "testQuery": {
+      "getAllTest": [
+        {
+          "id": 1,
+          "name": "Prueba 1",
+          "description": "Descripcion de Prueba 1",
+          "start": "2024-06-19T19:50:00",
+          "end": "2024-06-22T17:50:00",
+          "samples": null,
+          "specialInstructions": "Especial",
+          "profile": {
+            "file": ""
+          },
+          "attachments": [
+            {
+              "file": ""
+            }
+          ],
+          "enginner": {
+            "employeeNumber": 12313,
+            "employeeType": "ENGINEER",
+            "name": "Ing. Julio"
+          },
+          "technicians": [
+            {
+              "employeeType": "TECHNICIAN"
+            },
+            {
+              "employeeType": "TECHNICIAN"
+            }
+          ],
+          "specifications": [],
+          "equipments": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "status": "NEW",
+          "changeStatusTest": []
+        },
+        {
+          "id": 2,
+          "name": "Prueba 2",
+          "description": "Descripcion de Prueba 2",
+          "start": "2024-06-17T00:00:00",
+          "end": "2024-06-18T00:00:00",
+          "samples": null,
+          "specialInstructions": "Especial",
+          "profile": {
+            "file": ""
+          },
+          "attachments": [],
+          "enginner": null,
+          "technicians": [],
+          "specifications": [],
+          "equipments": [],
+          "status": "NEW",
+          "changeStatusTest": []
+        },
+        {
+          "id": 3,
+          "name": "Prueba 3",
+          "description": "Descripcion de Prueba 3",
+          "start": "2024-06-19T00:00:00",
+          "end": "2024-06-22T00:00:00",
+          "samples": null,
+          "specialInstructions": "Especial",
+          "profile": {
+            "file": ""
+          },
+          "attachments": [],
+          "enginner": null,
+          "technicians": [],
+          "specifications": [],
+          "equipments": [],
+          "status": "NEW",
+          "changeStatusTest": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div class="status-container">
+  <label for="status">Nuevo Estatus:</label>
+  <select id="status" [(ngModel)]="selectedStatus">
+    <option *ngFor="let status of statuses" [ngValue]="status">{{ status }}</option>
+  </select>
+
+  <label for="message">Mensaje:</label>
+  <textarea id="message" [(ngModel)]="statusMessage"></textarea>
+
+  <label for="changeStatusAtt">Attachment</label>
+  <input #fileInput id="changeStatusAtt" type="file" (change)="onFileChange($event)" />
+  <div *ngIf="attachment?.url">
+    <button type="button" (click)="download()">Download</button>
+    <button type="button" (click)="delete(fileInput)">Delete</button>
+  </div>
+
+  <div class="buttons">
+    <button (click)="confirmChange()">Cambiar Estatus</button>
+    <button (click)="clearForm()">Limpiar</button>
+    <button (click)="cancelChange()">Cancelar</button>
+  </div>
+
+  <div class="confirmation" *ngIf="showConfirmation">
+    <p>¿Estás seguro de que deseas cambiar el estatus a <strong>{{ selectedStatus }}</strong>?</p>
+    <button (click)="applyChange()">Sí, cambiar</button>
+    <button (click)="dismissConfirmation()">No, cancelar</button>
+  </div>
+
+  <div class="error-message" *ngIf="errorMessage">
+    <p>Tienes que ingresar un Mensaje</p>
+  </div>
+
+  <div class="transition-message" *ngIf="showTransitionMessage">
+    <p>{{ transitionMessage }}</p>
+  </div>
+</div>

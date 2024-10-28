@@ -1,0 +1,35 @@
+mutation($id: Int, $changeStatusTestRequest: ChangeStatusTestRequestInput){
+  testRequestMutation{
+    approveOrRejectTestRequest(id: $id,   status: $changeStatusTestRequest){
+      message
+      isSuccessful
+    }
+  }
+}
+
+query variables
+
+{
+  "id": 1,
+  "changeStatusTestRequest": {
+    "status": "PENDING",
+    "message": "Asd",
+    "attachment": {
+      "name": "Asd"
+    },
+    "idUser": 10
+  }
+}
+
+Response
+
+{
+  "data": {
+    "testRequestMutation": {
+      "approveOrRejectTestRequest": {
+        "message": "Test Request Solicitud de pruebas is New",
+        "isSuccessful": true
+      }
+    }
+  }
+}

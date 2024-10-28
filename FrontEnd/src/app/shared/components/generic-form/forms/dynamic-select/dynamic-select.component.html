@@ -1,0 +1,11 @@
+<form [formGroup]="customForm">
+    <div [hidden]="!field.show" class="form-group col-md-12">
+      <label class="labelsGeneric" for="{{field.field}}">{{field.label}}</label>
+      <select  class="form-control inputGeneric" [formControlName]="field.field">
+        <option *ngFor="let option of field.options" [value]="option.id">{{ option.text }}</option>
+      </select>
+      <!-- Display error message -->
+      <div class="errors" *ngIf="hasError(field.field, 'required')">{{field.field}} is required.</div>
+    </div>
+  </form>
+  

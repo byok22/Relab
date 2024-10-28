@@ -1,0 +1,52 @@
+:host {
+  display: block;
+}
+.customs-card {
+  padding: 4px;
+}
+
+
+.left {
+  width: calc(50% - 1px); /* Ancho de la parte izquierda menos el grosor del borde */
+  float: left;
+ /* border-right: 3px dashed #5a7288;  Borde izquierdo para separar */
+  padding-right: 10px; /* Espacio adicional a la derecha de la línea */
+}
+
+.right {
+  width: calc(50% + 1px); /* Ancho de la parte derecha más el grosor del borde */
+  float: right;
+}
+.content-right {
+  margin-top: 20px; /* Espacio entre el botón y el contenido adicional */
+  margin-left: 10px;
+}
+
+/* Clearfix para limpiar el float */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.miniTable{
+ /* border-radius:5px 5px 5px 5px;*/
+  border-bottom: 1px dashed #5a7288; /* Borde izquierdo para separar */
+  margin-bottom: 4px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}

@@ -1,0 +1,46 @@
+query{
+  equipmentQuery{
+    equipmentDropDown{
+      id
+      text
+    }
+  }
+}
+
+
+
+
+//result
+
+{
+  "data": {
+    "equipmentQuery": {
+      "equipmentDropDown": [
+        {
+          "id": "1",
+          "text": "Active"
+        },
+        {
+          "id": "2",
+          "text": "Expired"
+        },
+        {
+          "id": "3",
+          "text": "Not Asigned"
+        },
+        {
+          "id": "4",
+          "text": "Inactive"
+        },
+        {
+          "id": "5",
+          "text": "Under repair"
+        },
+        {
+          "id": "0",
+          "text": "All"
+        }
+      ]
+    }
+  }
+}

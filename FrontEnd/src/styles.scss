@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+@import 'primeflex/primeflex.scss';
+
+/* Order */
+@layer reset, primeng;
+
+/* Reset CSS */
+@layer reset {
+    button,
+    input {
+        /* CSS to Reset */
+    }
+}
+
+html, body { height: 100%; }
+
+app-master-page{
+    height: 100%;
+}
+
+body{
+   
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #f4f7fa;
+    height: 100%;
+  }
+
+  .fc-event {
+    cursor: pointer;
+  }

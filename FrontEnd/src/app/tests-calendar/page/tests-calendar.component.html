@@ -1,0 +1,102 @@
+<div class="customs-card">
+     <shared-generic-title  [title]="'Calendar'" ></shared-generic-title> 
+     <app-generic-menu [menuItems]="menuItems"></app-generic-menu>  
+</div>
+<p-messages [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'500ms'"></p-messages>
+ <full-calendar-app 
+    [eventsMain]="genericFullCalendar"
+    (eventSelected)="onEventSelected($event)"
+    ></full-calendar-app>
+
+    <p-dialog
+    [header]=" genericForm.tittle"
+    [(visible)]="displayMaximizable"
+    [modal]="true"
+    [style]="{width: '45vw'}"
+    [maximizable]="true"
+    [draggable]="false"
+    [resizable]="true"
+    *ngIf="displayMaximizable"
+    >
+    <div class="left">
+        
+       <generic-form [genericForm]="genericForm"></generic-form>       
+     </div>
+     <div class="right">               
+        <div class="content-right">
+
+          <div  class="miniTable">          
+            <table>
+              <thead>
+                <tr>                 
+                  <th>Engineer</th>     
+                </tr>
+              </thead>
+              <tbody>
+             
+                <tr >                 
+                  <td>{{ tempTest.enginner?.name }}</td>                                                   
+                </tr>
+              </tbody>
+            </table>           
+          </div>
+          
+          <div class="miniTable">
+            <p>Total Equipments: {{ tempTest.equipments?.length??0 }}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Equipment</th>     
+                </tr>
+              </thead>
+              <tbody>
+                @if(tempTest.equipments&&tempTest.equipments.length>0){
+                  @for (test of tempTest.equipments; track $index){
+                    <tr >
+                      <td>{{ test.name }}</td>                                  
+                    </tr>}
+
+                }@else {
+                  <tr >
+                    <td>{{'Equipments not Asigned'}}</td>                                  
+                  </tr>
+                }
+                
+              </tbody>
+            </table>           
+          </div>
+         
+          
+
+          <div class="miniTable">
+            <p>Total Technicians: {{ tempTest.technicians?.length??0 }}</p>
+            <table>
+              <thead>
+                <tr>                
+                  <th>Technician</th>    
+                </tr>
+              </thead>
+              <tbody>
+                @if(tempTest.technicians&&tempTest.technicians.length>0){
+                  @for (tech of tempTest.technicians; track $index){
+                    <tr >                    
+                      <td>{{ tech.name }}</td>                                                   
+                    </tr>
+
+                }}@else {
+                  <tr >                     
+                    <td>{{'Technicians not Asigned'}}</td>                                  
+                  </tr>
+                }
+                
+              </tbody>
+            </table>           
+          </div>
+
+
+        </div>
+        
+
+      </div>
+
+    </p-dialog> 

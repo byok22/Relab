@@ -1,0 +1,78 @@
+:host {
+  display: block;
+}
+:host ::ng-deep {
+  .p-progressbar {
+      height: .5rem;
+      background-color: #D8DADC;
+  
+      .p-progressbar-value {
+          background-color: #607D8B;
+      }
+  }
+}
+
+/* styles.scss o tu archivo CSS */
+.custom-button {
+  background-color: rgb(202, 199, 199); /* Cambia el color de fondo según tus preferencias */
+}
+
+/* styles.scss o tu archivo CSS */
+.custom-card {
+  border: 1px solid #ccc;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 1rem;
+}
+.cards{
+  padding-left: 2px;
+  padding-right: 2px;
+  border: 1px solid #ccc;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.custom-button {
+  background-color: rgb(202, 199, 199); /* Cambia el color de fondo según tus preferencias */
+}
+
+.cards {
+  padding: 0.5rem; /* Ajusta el espaciado interno de los KPIs según tus necesidades */
+  /* Otros estilos para los KPIs */
+  max-width: 120px;
+}
+p-dropdown{
+  padding: 0.5rem;
+}
+
+.ui-table-hide-on-sm{
+  display: none !important;
+}
+.theButton{
+  color: #003865;
+  background-color: transparent;
+  border: 0px;
+  cursor: pointer;
+}
+
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button1 {
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.button1:hover {
+  background-color: #dc3545;
+  color: white;
+}
+

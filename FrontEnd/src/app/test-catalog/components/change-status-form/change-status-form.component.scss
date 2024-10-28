@@ -1,0 +1,114 @@
+.status-container {
+  padding: 20px;
+  border-radius: 4px;
+  background: #ffffff;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.status-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.status-container select,
+.status-container textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+button:nth-child(2) {
+  background-color: #dc3545;
+  color: white;
+}
+
+button:nth-child(2):hover {
+  background-color: #c82333;
+}
+
+button:nth-child(3) {
+  background-color: #6c757d;
+  color: white;
+}
+
+button:nth-child(3):hover {
+  background-color: #5a6268;
+}
+
+.confirmation {
+  margin-top: 20px;
+  padding: 10px;
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  border-radius: 4px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.transition-message {
+  margin-top: 20px;
+  padding: 10px;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 2.5s;
+}
+
+.error-message {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f56868 !important;
+  border: 1px solid #f56868;
+  border-radius: 4px;
+  animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 2.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.itemGeneric {
+  width: 100% !important;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  font-size: 16px;
+  padding: 10px 15px;
+}

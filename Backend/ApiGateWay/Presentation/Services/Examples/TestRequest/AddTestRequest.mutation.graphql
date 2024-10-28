@@ -1,0 +1,24 @@
+mutation($testRequest: TestRequestInput){
+  testRequestMutation{
+    addTestRequest(testRequest: $testRequest){
+      message
+      isSuccessful
+    }
+  }
+}
+
+Query Variables
+
+
+{
+  "testRequest": {"id":0,"status":"NEW","description":"sad",
+    "start":"2024-09-04T00:00:00.000Z",
+    "end":"2024-09-17T00:00:00.000Z",
+    "tests":[{"id":1,"name":"asd",
+      "description":"asd","start":"2024-09-04T00:00:00.000Z",
+      "end":"2024-09-11T00:00:00.000Z","specifications":[],"equipments":[],
+      "samples":{"quantity":null,"weight":null,"size":null},
+      "specialInstructions":"sads","technicians":[],"idRequest":0,
+      "profile":null,"attachments":[],"lastUpdatedMessage":"Updated test form",
+      "status":"New","changeStatusTest":[],"updates":[]}]}
+}

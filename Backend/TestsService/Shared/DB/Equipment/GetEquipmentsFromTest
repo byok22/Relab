@@ -1,0 +1,23 @@
+USE [TE_ReilabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[GetEquipmentsFromTest]    Script Date: 27/09/2024 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetEquipmentsFromTest]
+    @TestId INT
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    SELECT e.[Id], e.[Name], e.[Description], e.[CalibrationDate]
+    FROM [dbo].[CT_Equipments] e
+    INNER JOIN [dbo].[IX_Test_Equipments] te
+    ON te.EquipmentID = e.Id
+    WHERE te.TestId = @TestId;
+END;
+GO
+GetEquipmentFormTest

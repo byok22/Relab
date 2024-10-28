@@ -1,0 +1,130 @@
+using Domain.Enums;
+using Domain.Generics;
+using Domain.Models;
+using Domain.Models.Employees;
+using Domain.Models.Equipments;
+using Domain.Models.Generics;
+
+namespace Shared.Dtos
+{
+    public class TestDto: BasicFieldsModels
+    {
+         public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public DateTime Start{ get; set; }
+        public DateTime End { get; set; }
+        public SampleDto? Samples { get; set; }
+        public string? SpecialInstructions { get; set; }
+        public AttachmentDto? Profile { get; set; }
+        public List<AttachmentDto>? Attachments { get; set; }
+        public EmployeeDto? Enginner{get; set;}
+        public List<EmployeeDto>? Technicians{get;set;}
+        public List<SpecificationDto>? Specifications { get; set; }
+        public List<Equipment>?Equipments { get; set; }
+        public TestStatusEnum Status { get; set; }
+        public List<ChangeStatusTest>? changeStatusTest{ get; set; }
+        public string? LastUpdatedMessage{get;set; }
+        public int? idRequest{get;set; }
+        public List<GenericUpdateDto>? updates { get; set; }
+    }
+}
+namespace Shared.Dtos
+{
+    public class SampleDto
+    {
+          public int Id { get; set; }
+        public int quantity  { get; set; }
+        public decimal weight  { get; set; }
+        public decimal size { get; set; }
+    }
+}
+
+namespace Shared.Dtos
+{
+    public class AttachmentDto{ 
+        public int Id { get; set; }   
+        public string Name { get; set; }=string.Empty;
+        public Byte[] File { get; set; }= new byte[0];
+        public string Url { get; set; }= string.Empty;
+        public string Location { get; set; }= string.Empty ;
+    }
+}
+
+using Domain.Models.Employees;
+
+namespace Shared.Dtos
+{
+    public class EmployeeDto
+    {
+        
+        public int Id { get; set; }
+        public int EmployeeNumber { get; set;}
+        public string Name { get; set;} = string.Empty;
+        public EmployeeType EmployeeType{ get; set;}
+    }
+}
+
+
+namespace Shared.Dtos
+{
+    public class SpecificationDto
+    {
+        public int Id { get; set; }
+        public string? SpecificationName { get; set; }
+        public string Details { get; set; }="";
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Domain.Models.Equipments
+{
+    public class Equipment
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }=string.Empty;
+        public string Description { get; set; }=string.Empty;
+        public DateTime CalibrationDate{get; set; }
+        
+    }
+}
+
+
+using Domain.Enums;
+
+
+namespace Domain.Models
+{
+    public class ChangeStatusTest
+    {
+        public int Id { get; set; }
+                public TestStatusEnum status { get; set; }
+                public string Message { get; set; }=string.Empty;
+                public Attachment? attachment{ get; set; }
+                public int idUser { get; set; }           
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Domain.Models;
+
+namespace Shared.Dtos
+{
+    public class GenericUpdateDto
+    {
+        
+        public int Id { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public User? User{ get; set; }
+        public string? Message { get; set; }
+        public string? Changes { get; set; }= string.Empty;
+    }
+}
+

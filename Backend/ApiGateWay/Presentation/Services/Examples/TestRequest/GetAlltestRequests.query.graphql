@@ -1,0 +1,22 @@
+query{
+  testRequestQuery{
+    testRequests{
+      id
+      status
+      description
+      start
+      end
+      profile{
+        name
+      }
+      tests{
+        id
+        name
+      }
+      createdBy{
+        userName
+      }
+      
+    }
+  }
+}

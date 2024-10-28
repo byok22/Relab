@@ -1,0 +1,170 @@
+Este es mi Ar_Test quiero que me hagas los sp similares como los ejemplos de Specification te mando
+USE [TE_ReilabTest]
+GO
+
+/****** Object:  Table [dbo].[AR_Tests]    Script Date: 20/09/2024 11:24:34 a. m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AR_Tests](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](255) NULL,
+	[Description] [nvarchar](max) NULL,
+	[Start] [datetime] NULL,
+	[End] [datetime] NULL,
+	[SamplesId] [int] NULL,
+	[SpecialInstructions] [nvarchar](max) NULL,
+	[ProfileId] [int] NULL,
+	[EnginnerId] [int] NULL,
+	[Status] [nvarchar](50) NULL,
+	[LastUpdatedMessage] [nvarchar](max) NULL,
+	[IdRequest] [int] NULL,
+	[CreatedAt] [datetime] NOT NULL,
+	[UpdatedAt] [datetime] NOT NULL,
+	[UpdatedBy] [nvarchar](255) NULL,
+	[CreatedBy] [nvarchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[AR_Tests] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+ALTER TABLE [dbo].[AR_Tests] ADD  DEFAULT (getdate()) FOR [UpdatedAt]
+GO
+
+
+
+USE [TE_ReilabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[CreateSpecification]    Script Date: 20/09/2024 11:23:47 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[CreateSpecification]
+    @SpecificationName NVARCHAR(255),
+    @Details NVARCHAR(MAX)
+AS
+BEGIN
+    DECLARE @NewId INT;
+    DECLARE @Message NVARCHAR(255);
+
+    BEGIN TRY
+        INSERT INTO [dbo].[AR_Specifications] (SpecificationName, Details)
+        VALUES (@SpecificationName, @Details);
+        
+        SET @NewId = SCOPE_IDENTITY();
+        SET @Message = 'Specification created successfully';
+
+        SELECT @NewId AS id, @Message AS message;
+    END TRY
+    BEGIN CATCH
+        SELECT NULL AS id, ERROR_MESSAGE() AS message;
+    END CATCH
+END;
+USE [TE_ReilabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteSpecification]    Script Date: 20/09/2024 11:23:55 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[DeleteSpecification]
+    @SpecificationId INT
+AS
+BEGIN
+    DECLARE @Message NVARCHAR(255);
+
+    BEGIN TRY
+        DELETE FROM [dbo].[AR_Specifications]
+        WHERE [Id] = @SpecificationId;
+
+        SET @Message = 'Specification deleted successfully';
+        SELECT @SpecificationId AS id, @Message AS message;
+    END TRY
+    BEGIN CATCH
+        SELECT NULL AS id, ERROR_MESSAGE() AS message;
+    END CATCH
+END;
+USE [TE_ReilabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[GetAllSpecifications]    Script Date: 20/09/2024 11:24:02 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetAllSpecifications]
+AS
+BEGIN
+    SELECT Id, SpecificationName, Details
+    FROM [dbo].[AR_Specifications];
+END
+
+USE [TE_ReilabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[GetSpecificationById]    Script Date: 20/09/2024 11:24:10 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetSpecificationById]
+    @SpecificationId INT
+AS
+BEGIN
+    BEGIN TRY
+        IF EXISTS (SELECT 1 FROM [dbo].[AR_Specifications] WHERE [Id] = @SpecificationId)
+        BEGIN
+            SELECT * 
+            FROM [dbo].[AR_Specifications]
+            WHERE [Id] = @SpecificationId;
+        END
+        ELSE
+        BEGIN
+            SELECT NULL AS id, 'Specification not found' AS message;
+        END
+    END TRY
+    BEGIN CATCH
+        SELECT NULL AS id, ERROR_MESSAGE() AS message;
+    END CATCH
+END;
+USE [TE_ReilabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateSpecification]    Script Date: 20/09/2024 11:24:19 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[UpdateSpecification]
+    @SpecificationId INT,
+    @SpecificationName NVARCHAR(255),
+    @Details NVARCHAR(MAX)
+AS
+BEGIN
+    DECLARE @Message NVARCHAR(255);
+
+    BEGIN TRY
+        UPDATE [dbo].[AR_Specifications]
+        SET SpecificationName = @SpecificationName,
+            Details = @Details
+        WHERE Id = @SpecificationId;
+
+        SET @Message = 'Specification updated successfully';
+        SELECT @SpecificationId AS id, @Message AS message;
+    END TRY
+    BEGIN CATCH
+        SELECT NULL AS id, ERROR_MESSAGE() AS message;
+    END CATCH
+END;
+

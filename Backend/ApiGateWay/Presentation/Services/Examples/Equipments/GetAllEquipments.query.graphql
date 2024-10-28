@@ -1,0 +1,27 @@
+query{
+  equipmentQuery{
+    equipments{
+      id
+      name
+      description
+    }
+  }
+}
+
+
+
+//result 
+
+{
+  "data": {
+    "equipmentQuery": {
+      "equipments": [
+        {
+          "id": 1,
+          "name": "Test",
+          "description": "Nothing"
+        }
+      ]
+    }
+  }
+}

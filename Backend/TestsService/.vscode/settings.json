@@ -1,0 +1,10 @@
+{
+  "csharp.testRunner": "dotnet",
+  "dotnet-test-explorer.testProjectPath": "TestsService/Tests", // Ajusta esta ruta según la ubicación de tu proyecto de prueba
+  "dotnet-test-explorer.testTimeout": 60000,
+  "dotnet-test-explorer.logLevel": "verbose",
+  "dotnet-test-explorer.debug": true,
+  "diagnosticMessages": true,
+  "parallelizeAssembly": false,
+  "parallelizeTestCollections": false
+}

@@ -1,0 +1,35 @@
+USE [TE_ReilabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[RemoveEquipmentFromTest]    Script Date: 27/09/2024 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[RemoveEquipmentFromTest]
+    @TestId INT,
+    @EquipmentId INT
+AS
+BEGIN
+    DECLARE @Message NVARCHAR(255);
+
+    BEGIN TRY
+        -- Verifica si la relación existe
+        IF NOT EXISTS (SELECT 1 FROM [dbo].[IX_Test_Equipments] WHERE [TestId] = @TestId AND [EquipmentID] = @EquipmentId)
+        BEGIN
+            SET @Message = 'Equipment not assigned to the specified test';
+            SELECT NULL AS id, @Message AS message;
+            RETURN;
+        END
+
+        -- Elimina la relación
+        DELETE FROM [dbo].[IX_Test_Equipments]
+        WHERE [TestId] = @TestId AND [EquipmentID] = @EquipmentId;
+
+        SET @Message = 'Equipment removed from test successfully';
+        SELECT @EquipmentId AS id, @Message AS message;
+    END TRY
+    BEGIN CATCH
+        SELECT NULL AS id, ERROR_MESSAGE() AS message;
+    END CATCH
+END;
+GO

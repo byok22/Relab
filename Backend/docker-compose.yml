@@ -1,0 +1,73 @@
+version: '3.4'
+
+services:
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+    networks:
+      - relab_network
+
+  apigateway:
+      image: apigateway
+      build:
+        context: .
+        dockerfile: ApiGateWay/Dockerfile
+      ports:
+        - "5004:80"  # Cambiar aquí el puerto del host
+      networks:
+        - relab_network
+
+  equipmentsservice:
+    image: equipmentsservice
+    build:
+      context: .
+      dockerfile: EquipmentsService/Dockerfile
+    ports:
+      - "5000:80"  # Cambiar aquí el puerto del host
+    networks:
+      - relab_network
+
+  usersservice:
+    image: usersservice
+    build:
+      context: .
+      dockerfile: UsersService/Dockerfile
+    ports:
+      - "5001:80"  # Cambiar aquí el puerto del host
+    networks:
+      - relab_network
+  
+  testsservice:
+    image: testsservice
+    build:
+      context: .
+      dockerfile: TestsService/Dockerfile
+    ports:
+      - "5005:80"  # Cambiar aquí el puerto del host
+    networks:
+      - relab_network
+
+  apiservice:
+    image: apirelabtestportal
+    build:
+      context: .
+      dockerfile: ApiRelabTestPortal/Dockerfile
+    ports:
+      - "5290:80"  # Cambiar aquí el puerto del host
+    networks:
+      - relab_network
+
+  # borrame:
+  #   image: borrame
+  #   build:
+  #     context: .
+  #     dockerfile: borrame/Dockerfile
+  #   ports:
+  #     - "5010:80"  # Cambiar aquí el puerto del host
+  #   networks:
+  #     - relab_network
+
+networks:
+  relab_network:
+    driver: bridge

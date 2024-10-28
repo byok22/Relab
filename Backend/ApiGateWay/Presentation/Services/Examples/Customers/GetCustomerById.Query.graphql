@@ -1,0 +1,20 @@
+query($id: Int){
+  customerQuery{
+    customer(id: $id){
+      id
+      customerID
+      customerName
+      division
+      buildingID
+      building
+      available
+    }
+    
+  }
+}
+
+//Query Variables
+
+{
+  "id": 1
+}

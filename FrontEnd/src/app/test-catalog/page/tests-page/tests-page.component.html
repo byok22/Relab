@@ -1,0 +1,50 @@
+<div class="customs-card">
+    <shared-generic-title  [title]="'Tests'" ></shared-generic-title>
+    <app-generic-menu  [menuItems]="menuItems"></app-generic-menu>
+</div>
+<p-messages [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'500ms'"></p-messages>
+ <div class="customs-card">
+    <generic-table  *ngIf="hideTable()==false" [theTable]="tableConfig" (output)="getModal($event)" (genericButtonEvent)="changeStatus($event)" ></generic-table> 
+</div>
+
+<p-dialog
+    header="{{EditAdd()}} Test"
+    [(visible)]="displayMaximizable"
+    [modal]="true"
+    [style]="{width: '90vw'}"
+    [maximizable]="true"
+    [draggable]="false"
+    [resizable]="true"
+    *ngIf="displayMaximizable"
+    >           
+        <div class="left">
+            <!-- <test-form [test]="dataForm()"  (formSubmit)="submit()"></test-form> -->
+            <test-form-complete  
+            [EditAdd]="EditAdd"
+            [testData]="dataForm()" (formSubmit)="onTestFormSubmit($event)" ></test-form-complete>
+           
+            <!-- <generic-form [genericForm]="genericForm"></generic-form>   -->
+          
+        </div>                                     
+    
+</p-dialog> 
+
+<p-dialog
+  header="Cambiar Status"
+  [(visible)]="displayStatus"
+  [modal]="true"
+  [style]="{width: '40vw'}"
+  [maximizable]="true"
+  [draggable]="false"
+  [resizable]="true"
+>
+
+ 
+  
+  <change-status-form
+  [currentStatus]="statusTemp"
+  [statuses]="statuses"
+  (statusChanged)="onStatusChanged($event)">
+  </change-status-form>
+
+</p-dialog>

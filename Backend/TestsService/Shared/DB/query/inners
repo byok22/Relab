@@ -1,0 +1,36 @@
+--/****** Script for SelectTopNRows command from SSMS  ******/
+--SELECT TOP (1000) [Id]
+--      ,[Name]
+--      ,[Description]
+--      ,[Start]
+--      ,[End]
+--      ,[SamplesId]
+--      ,[SpecialInstructions]
+--      ,[ProfileId]
+--      ,[EnginnerId]
+--      ,[Status]
+--      ,[LastUpdatedMessage]
+--      ,[IdRequest]
+--      ,[CreatedAt]
+--      ,[UpdatedAt]
+--      ,[UpdatedBy]
+--      ,[CreatedBy]
+--  FROM [TE_ReilabTest].[dbo].[AR_Test
+
+--/****** Script for SelectTopNRows command from SSMS  ******/
+--SELECT TOP (1000) [Id]
+--      ,[Quantity]
+--      ,[Weight]
+--      ,[Size]
+--  FROM [TE_ReilabTest].[dbo].[AR_Samples]
+
+
+select * from AR_Tests a 
+left join IX_Test_Attachment b on a.Id = b.TestId
+left join AR_Attachment c on b.AttachmentId = c.Id
+left join IX_Test_Equipments d on a.Id = d.TestId
+left join CT_Equipments e on d.EquipmentId = e.Id
+left join  AR_Samples f on a.SamplesId = f.Id
+left join CT_Employee g on a.EnginnerId = g.Id
+left join Ar_Attachment h on h.Id= a.ProfileId
+--where a.Id = 1s]

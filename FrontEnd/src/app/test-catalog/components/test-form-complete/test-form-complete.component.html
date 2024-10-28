@@ -1,0 +1,312 @@
+<form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+  <div [ngClass]="{ 'two-columns': isBasic, 'three-columns': !isBasic }" class="container">
+    <!-- Left Section -->
+    <div class="left">
+      <!-- Test ID (hidden) -->
+      <input type="hidden" formControlName="id">
+
+      <!-- Name -->
+      <div>
+        <label class="labelsGeneric" for="name">Test Name</label>
+        <input formControlName="name" class="itemGeneric" />
+        @if (testForm.get('name')?.invalid && testForm.get('name')?.touched) {
+          <div>Name is required.</div>
+        }
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label for="description" class="labelsGeneric">Test Description</label>
+        <input id="description" formControlName="description" class="itemGeneric" />
+        @if (testForm.get('description')?.invalid && testForm.get('description')?.touched) {
+          <div>Description is required.</div>
+        }
+      </div>
+
+      <!-- Start -->
+      <div>
+        <label for="start" class="labelsGeneric">Test Start</label>
+        <input id="start" formControlName="start" type="date" class="itemGeneric form-control" />
+      </div>
+
+      <!-- End -->
+      <div>
+        <label class="labelsGeneric" for="end">Test End</label>
+        <input id="end" formControlName="end" type="date" class="itemGeneric form-control" />
+        @if (testForm.get('end')?.errors?.['endDateBeforeStartDate']) {
+          <div>End date must be after the start date.</div>
+        }
+      </div>
+
+      <!-- Special Instructions -->
+      <div>
+        <label for="specialInstructions" class="labelsGeneric">Special Instructions</label>
+        <textarea id="specialInstructions" formControlName="specialInstructions" class="itemGeneric"></textarea>
+      </div>
+
+     <!-- Profile File -->
+     <div>
+      <label for="profile" class="labelsGeneric">Profile File</label>
+      <input id="profile" formControlName="profile" class="itemGeneric" type="file" (change)="onFileChange($event)" />
+      @if (this.profileAttachment?.url) {
+       <!-- label for name of profileAttachment -->
+        <label for="profile" class="labelsGeneric">{{ profileAttachment?.name }}</label>
+        <button type="button" (click)="downloadProfile()">Download</button>
+        <button type="button" (click)="deleteProfile()">Delete</button>
+      }      
+    </div>
+    
+      <div class="miniTable">
+        <p>Total Attachments: {{ testData.attachments?.length ?? 0 }}</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Attachments</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if(testData.attachments && testData.attachments.length > 0){
+              @for (attachment of testData.attachments; track $index){
+                <tr>
+                  <td>{{ attachment.name }}</td>
+                  <td>
+                    <button type="button" (click)="downloadAttachment(attachment)">Download</button>
+                    <button type="button" (click)="deleteAttachment($index)">Delete</button>
+                  </td>
+                </tr>
+              }
+            } @else {
+              <tr>
+                <td colspan="2">No Attachments</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <input id="attachment" class="itemGeneric" type="file" (change)="onAttachmentChange($event)" style="display: none;" />
+        <button class="btn btn-primary"  type="button" (click)="addAttachment()">Add</button>
+      </div>    
+    </div>
+
+    <!-- Middle Section -->
+     @if (!isBasic) {
+
+      <div class="middle">
+        <!-- Engineers Table -->
+        <div class="miniTable">
+          <table>
+            <thead>
+              <tr><th>Engineer</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ testData.enginner?.name ?? 'Engineer Not Assigned' }}
+              @if (testData.enginner?.name) {
+                <button type="button" (click)="onDeleteEng()">Delete</button>
+              }
+            </td></tr>
+              
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-primary" (click)="modalEngs()">{{ addEdit === 'Add' ? 'Add' : 'Update' }} Engineer</button>
+        </div>
+  
+        <!-- Technicians Table -->
+        <div class="miniTable">
+          <p>Total Technicians: {{ testData.technicians?.length ?? 0 }}</p>
+          <table>
+            <thead>
+              <tr>                
+                <th>Technician</th> 
+                <th>Actions</th>   
+              </tr>
+            </thead>
+            <tbody>
+              @if(testData.technicians&&testData.technicians.length>0){
+                @for (tech of testData.technicians; track $index){
+                  <tr >                    
+                    <td>{{ tech.name }}</td> 
+                    <td><button type="button" (click)="onDeleteTech(tech.id??0)">Delete</button></td>                                                  
+                  </tr>
+  
+              }
+            }@else {
+                <tr >                     
+                  <td>{{'Technicians not Asigned'}}</td>                                  
+                </tr>
+              }
+              
+            </tbody>
+          </table> 
+          <button type="button" class="btn btn-primary" (click)="modalTech()">{{ addEdit === 'Add' ? 'Add' : 'Update' }} Technician</button>
+        </div>
+  
+        <!-- Equipments Table -->
+        <div class="miniTable">
+          <p>Total Equipments: {{ testData.equipments?.length ?? 0 }}</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Equipment</th>  
+                <th> Actions </th>   
+              </tr>
+            </thead>
+            <tbody>
+              @if(testData.equipments&&testData.equipments.length>0){
+                @for (equipment of testData.equipments; track $index){
+                  <tr >
+                    <td>{{ equipment.name }}</td> 
+                    <td><button type="button" (click)="onDeleteEquipment(equipment)">Delete</button></td>                     
+                  </tr>}
+  
+              }@else {
+                <tr>
+                  <td>{{'Equipments not Asigned'}}</td>                                  
+                </tr>
+              }
+              
+            </tbody>
+          </table> 
+          <button type="button" class="btn btn-primary" (click)="modalEquipments()">{{ addEdit === 'Add' ? 'Add' : 'Update' }} Equipment</button>
+        </div>
+      </div>
+
+     }
+   
+
+    <!-- Right Section -->
+    <div class="right">
+      <!-- Specifications Table -->
+      <div class="miniTable">
+        <p>Total Specifications: {{ testData.specifications?.length ?? 0 }}</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Specifications</th>   
+              <th>Actions</th>   
+            </tr>
+          </thead>
+          <tbody>
+            @if(testData.specifications&&testData.specifications.length>0){
+              @for (specification of testData.specifications; track $index){
+                <tr >
+                  <td>{{ specification.specificationName }}</td>
+                  <td><button type="button" (click)="onDeleteSpecification(specification)">Delete</button></td>                                  
+                </tr>
+              }
+
+            }@else {
+              <tr>
+                <td>{{'Specifications not Asigned'}}</td>                                  
+              </tr>
+            }
+            
+          </tbody>
+        </table>  
+        <button type="button" class="btn btn-primary" (click)="modalSpecifications()">{{ addEdit === 'Add' ? 'Add' : 'Update' }} </button>
+      </div>
+
+      <!-- Samples Information -->
+      <div class="miniTable">
+        <table>
+          <thead>
+            <tr>                 
+              <th>Quantity</th> 
+              <th>Size (cm)</th> 
+              <th>Weight (Kg)</th>     
+            </tr>
+          </thead>
+          <tbody>
+        
+            <tr>   
+                          
+              <td>  <input id="quantity" formControlName="quantity" class="itemGeneric"  [value]="testData.samples?.quantity"/>  </td>
+              <td>  <input id="size" formControlName="size" class="itemGeneric"  [value]="testData.samples?.size"/>  </td>
+              <td>  <input id="weight" formControlName="weight" class="itemGeneric"  [value]="testData.samples?.weight"/>  </td>
+                  
+                                                            
+            </tr>
+          </tbody>
+        </table> 
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <button type="submit">{{ EditAdd() === 'Edit' ? 'Update' : 'Add' }}</button>
+    <button type="button" (click)="onClear()">Clear</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </div>
+</form>
+
+<!-- Modals -->
+<p-dialog
+  header="Equipments"
+  [(visible)]="displayMaximizableEquipments"
+  [modal]="true"
+  [style]="{ width: '45vw' }"
+  [maximizable]="true"
+  [draggable]="false"
+  [resizable]="true"
+  *ngIf="displayMaximizableEquipments"
+>
+  <basic-generic-table-with-select [columns]="columsField" [data]="equipments" (selected)="onSelectEquipment($event)"></basic-generic-table-with-select>
+</p-dialog>
+
+<p-dialog
+  header="Engineer"
+  [(visible)]="displayMaximizableEng"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+  [maximizable]="true"
+  [draggable]="false"
+  [resizable]="true"
+  *ngIf="displayMaximizableEng"
+>
+  <basic-generic-table-with-select [columns]="columsFieldUsers" [data]="engs" (selected)="onSelectEng($event)"></basic-generic-table-with-select>
+</p-dialog>
+
+<p-dialog
+  header="Technician"
+  [(visible)]="displayMaximizableTech"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+  [maximizable]="true"
+  [draggable]="false"
+  [resizable]="true"
+  *ngIf="displayMaximizableTech"
+>
+  <basic-generic-table-with-select [columns]="columsFieldUsers" [data]="techs" (selected)="onSelectTech($event)"></basic-generic-table-with-select>
+</p-dialog>
+
+<p-dialog
+  header="Specifications"
+  [(visible)]="displayMaximizableSpecifications"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+  [maximizable]="true"
+  [draggable]="false"
+  [resizable]="true"
+  *ngIf="displayMaximizableSpecifications"
+>
+  <generic-form [genericForm]="genericForm"></generic-form>
+</p-dialog>
+
+ <!-- Dialog for Update Confirmation -->
+ @if(maximizeUpdate){
+
+  <p-dialog
+  header="Update"
+  [(visible)]="maximizeUpdate"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+  [maximizable]="maximizeUpdate"
+  [draggable]="false"
+  [resizable]="true"
+  >
+  <generic-update-form 
+    [currentUpdate]="currentUpdate"    
+    (updateSubmitted)="updateMessage($event)"></generic-update-form>
+  </p-dialog>
+
+ }

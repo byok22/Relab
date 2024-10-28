@@ -1,0 +1,131 @@
+
+<div class="customs-card">
+     <shared-generic-title  [title]="'Test Requests'" ></shared-generic-title>
+     <app-generic-menu  [menuItems]="menuItems"></app-generic-menu>
+</div>
+<p-messages [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'500ms'"></p-messages>
+<div class="customs-card">
+     <generic-table  *ngIf="hideTable()==false" [theTable]="tableConfig" (output)="getModal($event)"  (genericButtonEvent)="changeStatus($event)"  >
+     </generic-table> 
+</div>
+
+<p-dialog
+    header="{{EditAdd()}}"
+    [(visible)]="displayMaximizable"
+    [modal]="true"
+    [style]="{width: '45vw'}"
+    [maximizable]="true"
+    [draggable]="false"
+    [resizable]="true"
+    *ngIf="displayMaximizable"
+    >
+    @if(dataTests().length<=0){
+      <h4  class="message">Tienes Que Agregar al menos una Prueba</h4>
+    }
+        
+      <div class="left1">
+         <!--Form-->
+        <generic-form
+          [saveUpdate]="saveUpdate"
+          [genericForm]="genericForm"
+
+        ></generic-form>  
+        <!--Form-->       
+        <!-- Mostrar mensaje de éxito -->
+        <!-- <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+        </div> -->
+      </div>
+      <div class="right1">        
+       
+        <div class="content-right">
+          <div>
+            <p>Total Tests: {{ dataTests().length }}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Prueba</th>
+                  <th>Descripción</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (test of dataTests(); track $index){
+                <tr >
+                  <td>{{ test.name }}</td>
+                  <td>{{ test.description }}</td>
+                  <td>
+                    <button (click)="removeTest(test.id)">
+                      <fa-icon [icon]="faTrashAlt"></fa-icon>
+                    </button>
+                  </td>
+                </tr>}
+              </tbody>
+            </table>
+            <button type="button" class="btn btn-secondary" label="Agregar Pruebas" icon="pi pi-plus" (click)="showAddTestModal()">Agregar Prueba</button>
+          </div>
+
+        </div>
+
+      </div>
+         
+ 
+    
+</p-dialog>
+
+
+
+<p-dialog
+    header="{{EditAdd()}} Test"
+    [(visible)]="displayTestModal"
+    [modal]="true"
+    [style]="{width: '45vw'}"
+    [maximizable]="true"
+    [draggable]="false"
+    [resizable]="true"
+    *ngIf="displayTestModal"
+    >           
+        <div class="">
+           
+            <test-form-complete  
+              [EditAdd]="EditAdd"
+              [isBasic]="true"
+
+              [testData]="dataForm()" (formSubmit)="onTestFormSubmit($event)" >
+            </test-form-complete>                         
+        </div>                                     
+    
+</p-dialog> 
+
+<p-dialog
+  header="Cambiar Status"
+  [(visible)]="displayStatus"
+  [modal]="true"
+  [style]="{width: '40vw'}"
+  [maximizable]="true"
+  [draggable]="false"
+  [resizable]="true"
+>
+
+ 
+  
+  <change-status-form
+  [currentStatus]="statusTemp"
+  [statuses]="statusesTestRequest"
+  (statusChanged)="onStatusChanged($event)">
+  </change-status-form>
+
+</p-dialog>
+
+
+
+
+
+
+
+
+
+
+    
+    
+

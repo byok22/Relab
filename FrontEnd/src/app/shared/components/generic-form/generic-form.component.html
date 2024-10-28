@@ -1,0 +1,55 @@
+
+<ng-container #dynamicInputContainer>
+
+</ng-container>
+
+<!--Buttons For Submit-->
+<div class="form-group">
+    <div class="row botons">
+      <div class="col-md-9">
+        @if(genericForm.customButton&&genericForm.customButton!=''){
+
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+            {{  genericForm.customButton }}
+          </button>
+        }
+        @else {
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+            {{  genericForm.editAdd !== 'Add' ? 'Save Changes' : 'Add New' }}
+          </button>
+        }
+        
+      </div>
+      <div class="col-md-3">
+        @if(genericForm.customButton&&genericForm.customButton!=''){
+
+        }@else {
+
+          <button type="button" class="btn btn-danger" *ngIf="genericForm.editAdd === 'Add' " (click)="clearForm()">Clear</button>
+        }
+       
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialog for Update Confirmation -->
+   @if(maximizeUpdate&&saveUpdate){
+
+    <p-dialog
+    header="Cambiar Status"
+    [(visible)]="maximizeUpdate"
+    [modal]="true"
+    [style]="{ width: '30vw' }"
+    [maximizable]="maximizeUpdate"
+    [draggable]="false"
+    [resizable]="true"
+    >
+    <generic-update-form 
+      [currentUpdate]="currentUpdate"    
+      (updateSubmitted)="updateMessage($event)"></generic-update-form>
+    </p-dialog>
+
+   }
+
+
+

@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  &.two-columns {
+    .left,
+    .right {
+      width: calc(50% - 10px); // Ajuste para dos columnas
+    }
+
+    .middle {
+      display: none; // Ocultar la columna del medio
+    }
+  }
+
+  &.three-columns {
+    .left,
+    .middle,
+    .right {
+      width: calc(33.33% - 10px); // Ajuste para tres columnas
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.itemGeneric {
+  width: 100% !important;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.labelsGeneric {
+  margin-top: 6px !important;
+  margin-left: 4px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.btn-primary {
+  background-color: #003865;
+  border: 1px solid #003865 !important;
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #f7f2f2;
+  cursor: pointer;
+  border: none;
+  margin-top: 4px;
+  margin-left: 72%;
+  height: 25px !important;
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+  justify-content: right; /* Centrar los botones horizontalmente */
+  margin-top: 20px; /* Espacio superior para separar del contenido anterior */
+}
+
+.buttons button {
+  padding: 10px 20px; /* Espacio interno del botón */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  font-size: 16px; /* Tamaño de fuente */
+  font-weight: bold; /* Negrita */
+}
+
+.buttons button[type="submit"] {
+  background-color: #4caf50; /* Color de fondo para el botón de submit (verde) */
+  color: white; /* Color de texto */
+}
+
+.buttons button[type="button"] {
+  background-color: #f44336; /* Color de fondo para los botones de acción (rojo) */
+  color: white; /* Color de texto */
+}
+
+.buttons button[type="button"]:hover,
+.buttons button[type="submit"]:hover {
+  background-color: #45a049; /* Color de fondo al pasar el ratón por encima (más oscuro) */
+}
+
+.buttons button[type="button"]:hover {
+  background-color: #d32f2f; /* Color de fondo al pasar el ratón por encima (más oscuro) */
+}

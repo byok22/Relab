@@ -1,0 +1,48 @@
+query($status:  TestStatusEnum){
+  testQuery{
+    getAllTestByStatus(status: $status){
+      id
+      name
+      description
+      start
+      end
+      samples{
+        quantity
+        weight
+        size
+      }
+      
+      specialInstructions
+      profile {
+        file
+      }
+      attachments {
+        file
+      }
+      enginner{
+        employeeNumber       
+        employeeType
+        name
+      }
+      technicians {
+        employeeType
+      }
+      specifications {
+        specificationName
+      }
+      equipments {
+        id
+      }
+      status
+      changeStatusTest {
+        status
+      }
+      
+    }
+  }
+}
+
+///
+{
+  "status": "NEW"
+}

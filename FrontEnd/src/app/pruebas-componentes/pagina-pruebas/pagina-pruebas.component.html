@@ -1,0 +1,24 @@
+
+<app-generic-menu [menuItems]="menuItems"></app-generic-menu>
+<p-dialog
+    header="{{EditAdd()}}"
+    [(visible)]="displayMaximizable"
+    [modal]="true"
+    [style]="{width: '30vw'}"
+    [maximizable]="true"
+    [draggable]="false"
+    [resizable]="true"
+    *ngIf="displayMaximizable"
+    >
+    <!--Form-->
+    <generic-form [genericForm]="genericForm"></generic-form>  
+    <!--Form-->       
+    <!-- Mostrar mensaje de éxito -->
+    <!-- <div class="success-message" *ngIf="successMessage">
+    {{ successMessage }}
+    </div> -->
+</p-dialog>
+
+<generic-table [theTable]="tableConfig" (output)="getModal($event)"  ></generic-table>
+
+<full-calendar-app [eventsMain]="genericFullCalendar"></full-calendar-app>

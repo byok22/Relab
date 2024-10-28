@@ -1,0 +1,148 @@
+ query($status:TestRequestsStatusEnum ){
+          testRequestQuery{
+            testRequestsByStatus(status: $status){
+              
+              id
+              status              
+              description
+              start
+              end
+              profile{
+                name
+                url
+              }
+              createdBy{
+                id
+                userName
+              }
+              tests{
+                name
+                specialInstructions
+                description
+                start
+                end
+                samples{
+                  quantity
+                  weight
+                  size
+                }
+                profile {                  
+                  name
+                  url
+                }
+                attachments{
+                  name
+                  url
+                } 
+                enginner{
+                  employeeNumber
+                  name                  
+                }
+                technicians{
+                  employeeNumber
+                  name
+                }
+                equipments{
+                  name
+                  calibrationDate
+                }
+                status
+              }                       
+            }
+          }
+        }
+
+
+        variables
+
+{
+  "status": "NEW"
+}
+
+
+## Result
+
+{
+  "data": {
+    "testRequestQuery": {
+      "testRequestsByStatus": [
+        {
+          "id": 1,
+          "status": "NEW",
+          "description": "Request of Test 1",
+          "start": "2024-09-03T10:21:06.193988-06:00",
+          "end": "2024-09-16T10:21:06.1939881-06:00",
+          "profile": {
+            "name": "Imagen Mujer 1",
+            "url": "https://media.istockphoto.com/id/1674601384/es/foto/mujer-de-negocios-madura-que-busca-un-holograma-en-la-oficina.webp?s=2048x2048&w=is&k=20&c=B-0Ti1DQMuAkLnQ8-VhKnkw4evaGbJqIW3ZNFafxd8g="
+          },
+          "createdBy": {
+            "id": 1,
+            "userName": "User"
+          },
+          "tests": [
+            {
+              "name": "Prueba 1",
+              "specialInstructions": null,
+              "description": "Prueba de Request of Test 1",
+              "start": "2024-09-03T10:21:06.1939912-06:00",
+              "end": "2024-09-16T10:21:06.1939913-06:00",
+              "samples": {
+                "quantity": 1,
+                "weight": 100,
+                "size": 10
+              },
+              "profile": null,
+              "attachments": null,
+              "enginner": {
+                "employeeNumber": 3524661,
+                "name": "Nombre"
+              },
+              "technicians": null,
+              "equipments": null,
+              "status": "NEW"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "status": "NEW",
+          "description": "Solicitud de pruebas 2",
+          "start": "2024-09-03T10:21:06.1939961-06:00",
+          "end": "2024-09-04T10:21:06.1939961-06:00",
+          "profile": {
+            "name": "Imagen Mujer 2",
+            "url": "https://media.istockphoto.com/id/1674601384/es/foto/mujer-de-negocios-madura-que-busca-un-holograma-en-la-oficina.webp?s=2048x2048&w=is&k=20&c=B-0Ti1DQMuAkLnQ8-VhKnkw4evaGbJqIW3ZNFafxd8g="
+          },
+          "createdBy": {
+            "id": 1,
+            "userName": "User"
+          },
+          "tests": [
+            {
+              "name": "Prueba 1",
+              "specialInstructions": null,
+              "description": "Prueba de Request of Test 1",
+              "start": "2024-09-03T10:21:06.1939966-06:00",
+              "end": "2024-09-16T10:21:06.1939966-06:00",
+              "samples": {
+                "quantity": 1,
+                "weight": 100,
+                "size": 10
+              },
+              "profile": null,
+              "attachments": null,
+              "enginner": {
+                "employeeNumber": 3524661,
+                "name": "Nombre"
+              },
+              "technicians": null,
+              "equipments": null,
+              "status": "NEW"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

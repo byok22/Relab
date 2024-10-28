@@ -1,0 +1,35 @@
+USE [TE_ReilabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[AssignEquipmentToTest]    Script Date: 27/09/2024 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[AssignEquipmentToTest]
+    @TestId INT,
+    @EquipmentId INT
+AS
+BEGIN
+    DECLARE @Message NVARCHAR(255);
+
+    BEGIN TRY
+        -- Verifica si el equipo existe
+        IF NOT EXISTS (SELECT 1 FROM [dbo].[CT_Equipments] WHERE [Id] = @EquipmentId)
+        BEGIN
+            SET @Message = 'Equipment not found';
+            SELECT NULL AS id, @Message AS message;
+            RETURN;
+        END
+
+        -- Inserta en la tabla IX_Test_Equipments
+        INSERT INTO [dbo].[IX_Test_Equipments] ([TestId], [EquipmentID])
+        VALUES (@TestId, @EquipmentId);
+
+        SET @Message = 'Equipment assigned to test successfully';
+        SELECT @EquipmentId AS id, @Message AS message;
+    END TRY
+    BEGIN CATCH
+        SELECT NULL AS id, ERROR_MESSAGE() AS message;
+    END CATCH
+END;
+GO
